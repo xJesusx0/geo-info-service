@@ -14,5 +14,8 @@
   "private": true,
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "scripts": {
+    "dev": "bun run --hot src/index.ts"
   }
 }
