@@ -1,7 +1,8 @@
 import express from "express";
+import { env } from "./core/env";
 
 const app = express();
-const port = 3000;
+const port = env.PORT;
 
 interface TestResponse {
   message: string;
