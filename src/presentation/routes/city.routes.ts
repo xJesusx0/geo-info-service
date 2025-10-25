@@ -10,6 +10,6 @@ export function createCityRoutes(): Router {
   );
 
   router.get("/", cityController.getAll);
-
+  router.get("/:id", cityController.getById);
   return router;
 }
