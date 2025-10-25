@@ -1,6 +1,6 @@
-import { City } from "../../types/city";
+import { City, CitySearchQueryParams } from "../../types/city";
 
 export interface CityRepository {
-  findAll(): Promise<City[]>;
+  findAll(queryParams: CitySearchQueryParams): Promise<City[]>;
   findById(id: number): Promise<City | null>;
 }

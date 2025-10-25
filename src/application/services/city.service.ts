@@ -1,11 +1,15 @@
 import { CityRepository } from "../../domain/repositories/city.repository";
-import { City } from "../../types/city";
+import { City, CitySearchQueryParams } from "../../types/city";
 
 export class CityService {
   constructor(private cityRepository: CityRepository) {}
 
-  async getAllCities(): Promise<City[]> {
-    return await this.cityRepository.findAll();
+  async getAllCities(queryParams: CitySearchQueryParams): Promise<City[]> {
+    if (!queryParams) {
+      queryParams = {};
+    }
+
+    return await this.cityRepository.findAll(queryParams);
   }
 
   async getCityById(id: number): Promise<City | null> {
