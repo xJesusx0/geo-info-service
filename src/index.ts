@@ -14,7 +14,8 @@ app.get("/", async (req, res) => {
     message: "Hello",
   });
 });
-app.use("/cities", createCityRoutes());
+
+app.use("/api/v1/cities", createCityRoutes());
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
