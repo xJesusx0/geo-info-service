@@ -17,10 +17,14 @@ export class SupabaseCityRepository implements CityRepository {
 
     if (queryParams.countryId) {
       query = query.eq("country_id", queryParams.countryId);
+    } else if (queryParams.countryName) {
+      query = query.ilike("country_name_es", `%${queryParams.countryName}%`);
     }
 
     if (queryParams.departmentId) {
       query = query.eq("department_id", queryParams.departmentId);
+    } else if (queryParams.departmentName) {
+      query = query.ilike("department_name", `%${queryParams.departmentName}%`);
     }
 
     if (queryParams.name) {
@@ -29,15 +33,6 @@ export class SupabaseCityRepository implements CityRepository {
 
     if (queryParams.daneCode) {
       query = query.eq("dane_code", queryParams.daneCode);
-    }
-
-    // Ahora SÍ funcionan porque son columnas directas de la vista
-    if (queryParams.countryName) {
-      query = query.ilike("country_name_es", `%${queryParams.countryName}%`);
-    }
-
-    if (queryParams.departmentName) {
-      query = query.ilike("department_name", `%${queryParams.departmentName}%`);
     }
 
     const { data, error } = await query;

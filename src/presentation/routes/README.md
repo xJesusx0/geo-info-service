@@ -11,7 +11,13 @@ Recupera una lista de todas las ciudades disponibles en la base de datos.
 - **URL**: `/api/v1/cities`
 - **Método**: `GET`
 - **Parámetros de URL**: Ninguno
-- **Parámetros de Query**: Ninguno
+- **Parámetros de Query**: 
+    - `countryId` (opcional): Filtra las ciudades por el ID del país.
+    - `departmentId` (opcional): Filtra las ciudades por el ID del departamento.
+    - `name` (opcional): Filtra las ciudades por el nombre.
+    - `daneCode` (opcional): Filtra las ciudades por el código DANE.
+    - `countryName` (opcional): Filtra las ciudades por el nombre del país.
+    - `departmentName` (opcional): Filtra las ciudades por el nombre del departamento.
 - **Cuerpo de la Solicitud**: Ninguno
 
 #### Respuesta Exitosa (Código 200)
