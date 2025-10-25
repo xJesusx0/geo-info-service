@@ -7,6 +7,7 @@ import { SupabaseCityRepository } from "../infraestructure/repositories/city.rep
 import { CityService } from "./services/city.service";
 import { CityRepository } from "../domain/repositories/city.repository";
 import "dotenv/config";
+import { CityController } from "../presentation/controllers/city.controller";
 
 export function configureContainer() {
   validateEnv();
@@ -21,7 +22,7 @@ export function configureContainer() {
   container.registerFactory(
     TOKENS.CITY_REPOSITORY,
     () => {
-      const supabase: SupabaseClient<Database> = container.resolve(
+      const supabase = container.resolve<SupabaseClient<Database>>(
         TOKENS.SUPABASE_CLIENT
       );
       return new SupabaseCityRepository(supabase);
@@ -32,10 +33,19 @@ export function configureContainer() {
   container.registerFactory(
     TOKENS.CITY_SERVICE,
     () => {
-      const cityRepository: CityRepository = container.resolve(
+      const cityRepository = container.resolve<CityRepository>(
         TOKENS.CITY_REPOSITORY
       );
       return new CityService(cityRepository);
+    },
+    { singleton: true }
+  );
+
+  container.registerFactory(
+    TOKENS.CITY_CONTROLLER,
+    () => {
+      const cityService = container.resolve<CityService>(TOKENS.CITY_SERVICE);
+      return new CityController(cityService);
     },
     { singleton: true }
   );
