@@ -7,13 +7,22 @@ export class CityController {
   constructor(private cityService: CityService) {}
 
   getAll = async (req: Request, res: Response) => {
-    const { countryId, departmentId, name, daneCode } = req.query;
+    const {
+      countryId,
+      departmentId,
+      name,
+      daneCode,
+      countryName,
+      departmentName,
+    } = req.query;
 
     const queryParams: CitySearchQueryParams = {
       countryId: countryId ? Number(countryId) : undefined,
       departmentId: departmentId ? Number(departmentId) : undefined,
       name: name ? String(name) : undefined,
       daneCode: daneCode ? String(daneCode) : undefined,
+      countryName: countryName ? String(countryName) : undefined,
+      departmentName: departmentName ? String(departmentName) : undefined,
     };
 
     const cities = await this.cityService.getAllCities(queryParams);

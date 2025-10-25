@@ -203,6 +203,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_neighborhood_city"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "v_city_with_relations"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "fk_neighborhood_locality"
             columns: ["locality_id"]
             isOneToOne: false
@@ -309,6 +316,38 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      v_city_with_relations: {
+        Row: {
+          active: boolean | null
+          country_id: number | null
+          country_name_en: string | null
+          country_name_es: string | null
+          created_at: string | null
+          dane_code: string | null
+          department_dane_code: string | null
+          department_id: number | null
+          department_name: string | null
+          id: number | null
+          name: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_city_country"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "country"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_city_department"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "department"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Functions: {
