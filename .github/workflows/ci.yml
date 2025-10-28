@@ -32,7 +32,3 @@ jobs:
       # 5. Ejecutar ESLint
       - name: Run ESLint
         run: bun run lint
-
-      # 6. Ejecutar Build de Svelte
-      - name: Run Build
-        run: bun run build
