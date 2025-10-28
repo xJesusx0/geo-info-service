@@ -1,3 +1,11 @@
+/**
+ * Dependency Injection Container
+ *
+ * Note: Este archivo usa `any` intencionalmente para permitir
+ * flexibilidad en los tipos de dependencias que puede manejar.
+ * Es un patrón común en contenedores de DI.
+ */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Constructor<T> = new (...args: any[]) => T;
 type Factory<T> = (...args: any[]) => T;
 

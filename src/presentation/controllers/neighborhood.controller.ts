@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { NeighborhoodService } from "../../application/services/neighborhood.service";
-import { ErrorResponse } from "../dtos/api.dto";
+import { Request, Response } from 'express';
+import { NeighborhoodService } from '../../application/services/neighborhood.service';
+import { ErrorResponse } from '../dtos/api.dto';
 export class NeighborhoodController {
   constructor(private neighborhoodService: NeighborhoodService) {}
 
@@ -10,7 +10,7 @@ export class NeighborhoodController {
     let numericLatitude: number;
     if (!longitude || !latitude) {
       const response: ErrorResponse = {
-        message: "Invalid request params, missing longitude or latitude",
+        message: 'Invalid request params, missing longitude or latitude',
       };
       res.json(response).status(400);
     }
@@ -19,7 +19,8 @@ export class NeighborhoodController {
       numericLongitude = Number(longitude);
       numericLatitude = Number(latitude);
     } catch (error) {
-      res.json("Invalid values").status(400);
+      console.error(error);
+      res.json('Invalid values').status(400);
       return;
     }
 
@@ -30,7 +31,7 @@ export class NeighborhoodController {
 
     if (!data) {
       res.json({
-        message: "No se encontro la locacion solicitada",
+        message: 'No se encontro la locacion solicitada',
         context: {
           longitude: longitude,
           latitude: latitude,
