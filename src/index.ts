@@ -13,6 +13,7 @@ const port = env.PORT;
 app.get('/', async (req, res) => {
   res.json({
     message: 'Hello',
+    status: 'ok',
   });
 });
 
