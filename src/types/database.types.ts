@@ -54,11 +54,25 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_city_country"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["country_id"]
+          },
+          {
             foreignKeyName: "fk_city_department"
             columns: ["department_id"]
             isOneToOne: false
             referencedRelation: "department"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_city_department"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["department_id"]
           },
         ]
       }
@@ -133,6 +147,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "country"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_department_country"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["country_id"]
           },
         ]
       }
@@ -217,11 +238,25 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_neighborhood_locality"
+            columns: ["locality_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["locality_id"]
+          },
+          {
             foreignKeyName: "fk_neighborhood_urban_area"
             columns: ["urban_area_id"]
             isOneToOne: false
             referencedRelation: "urban_area"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_neighborhood_urban_area"
+            columns: ["urban_area_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["urban_area_id"]
           },
         ]
       }
@@ -341,10 +376,59 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_city_country"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["country_id"]
+          },
+          {
             foreignKeyName: "fk_city_department"
             columns: ["department_id"]
             isOneToOne: false
             referencedRelation: "department"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_city_department"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "v_neighborhood_by_point"
+            referencedColumns: ["department_id"]
+          },
+        ]
+      }
+      v_neighborhood_by_point: {
+        Row: {
+          city_dane_code: string | null
+          city_id: number | null
+          city_name: string | null
+          country_id: number | null
+          country_name_en: string | null
+          country_name_es: string | null
+          department_dane_code: string | null
+          department_id: number | null
+          department_name: string | null
+          locality_id: number | null
+          locality_name: string | null
+          neighborhood_id: number | null
+          neighborhood_name: string | null
+          urban_area_id: number | null
+          urban_area_name: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_neighborhood_city"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "city"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_neighborhood_city"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "v_city_with_relations"
             referencedColumns: ["id"]
           },
         ]
@@ -609,6 +693,24 @@ export type Database = {
         Returns: boolean
       }
       geomfromewkt: { Args: { "": string }; Returns: unknown }
+      get_neighborhood_by_point: {
+        Args: { lat: number; lon: number }
+        Returns: {
+          city_dane_code: string
+          city_id: number
+          city_name: string
+          country_id: number
+          country_name: string
+          department_dane_code: string
+          department_id: number
+          department_name: string
+          distance_meters: number
+          locality_name: string
+          neighborhood_id: number
+          neighborhood_name: string
+          urban_area_name: string
+        }[]
+      }
       gettransactionid: { Args: never; Returns: unknown }
       longtransactionsenabled: { Args: never; Returns: boolean }
       populate_geometry_columns:
@@ -718,10 +820,6 @@ export type Database = {
         | { Args: { "": string }; Returns: string }
       st_asgml:
         | {
-            Args: { geom: unknown; maxdecimaldigits?: number; options?: number }
-            Returns: string
-          }
-        | {
             Args: {
               geom: unknown
               id?: string
@@ -733,13 +831,16 @@ export type Database = {
             Returns: string
           }
         | {
+            Args: { geom: unknown; maxdecimaldigits?: number; options?: number }
+            Returns: string
+          }
+        | {
             Args: {
               geog: unknown
               id?: string
               maxdecimaldigits?: number
               nprefix?: string
               options?: number
-              version: number
             }
             Returns: string
           }
@@ -750,6 +851,7 @@ export type Database = {
               maxdecimaldigits?: number
               nprefix?: string
               options?: number
+              version: number
             }
             Returns: string
           }
@@ -1212,11 +1314,11 @@ export type Database = {
           }
       st_triangulatepolygon: { Args: { g1: unknown }; Returns: unknown }
       st_union:
-        | { Args: { geom1: unknown; geom2: unknown }; Returns: unknown }
         | {
             Args: { geom1: unknown; geom2: unknown; gridsize: number }
             Returns: unknown
           }
+        | { Args: { geom1: unknown; geom2: unknown }; Returns: unknown }
       st_voronoilines: {
         Args: { extend_to?: unknown; g1: unknown; tolerance?: number }
         Returns: unknown
