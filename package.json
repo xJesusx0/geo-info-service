@@ -13,6 +13,11 @@
   },
   "private": true,
   "dependencies": {
+    "@supabase/supabase-js": "^2.76.1",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0"
+  },
+  "scripts": {
+    "dev": "bun run --hot src/index.ts"
   }
 }
