@@ -1,20 +1,13 @@
-import { Request, Response } from "express";
-import { CityService } from "../../application/services/city.service";
-import { City, CitySearchQueryParams } from "../../types/city";
-import { ErrorResponse } from "../dtos/api.dto";
+import { Request, Response } from 'express';
+import { CityService } from '../../application/services/city.service';
+import { City, CitySearchQueryParams } from '../../types/city';
+import { ErrorResponse } from '../dtos/api.dto';
 
 export class CityController {
   constructor(private cityService: CityService) {}
 
   getAll = async (req: Request, res: Response) => {
-    const {
-      countryId,
-      departmentId,
-      name,
-      daneCode,
-      countryName,
-      departmentName,
-    } = req.query;
+    const { countryId, departmentId, name, daneCode, countryName, departmentName } = req.query;
 
     const queryParams: CitySearchQueryParams = {
       countryId: countryId ? Number(countryId) : undefined,
@@ -35,7 +28,7 @@ export class CityController {
     const city: City | null = await this.cityService.getCityById(cityId);
 
     if (!city) {
-      const response: ErrorResponse = { message: "City not found" };
+      const response: ErrorResponse = { message: 'City not found' };
       return res.status(404).json(response);
     }
 

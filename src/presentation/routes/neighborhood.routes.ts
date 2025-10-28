@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { container } from "../../core/container";
-import { TOKENS } from "../../core/tokens";
-import { NeighborhoodController } from "../controllers/neighborhood.controller";
+import { Router } from 'express';
+import { container } from '../../core/container';
+import { TOKENS } from '../../core/tokens';
+import { NeighborhoodController } from '../controllers/neighborhood.controller';
 
 export function createNeighborhoodRoutes(): Router {
   const router = Router();
@@ -9,6 +9,6 @@ export function createNeighborhoodRoutes(): Router {
     TOKENS.NEIGHBORHOOD_CONTROLLER
   );
 
-  router.get("/point", neighborhoodController.getByPoint);
+  router.get('/point', neighborhoodController.getByPoint);
   return router;
 }
