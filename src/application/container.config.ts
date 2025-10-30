@@ -12,6 +12,14 @@ import { SupabaseNeighborhoodRepository } from '../infraestructure/repositories/
 import { NeighborhoodService } from './services/neighborhood.service';
 import { NeighborhoodRepository } from '../domain/repositories/neighborhood.repository';
 import { NeighborhoodController } from '../presentation/controllers/neighborhood.controller';
+import { SupabaseCountryRepository } from '../infraestructure/repositories/country.repository';
+import { CountryRepository } from '../domain/repositories/country.repository';
+import { CountryService } from './services/country.service';
+import { CountryController } from '../presentation/controllers/country.controller';
+import { SupabaseDepartmentRepository } from '../infraestructure/repositories/department.repository';
+import { DepartmentRepository } from '../domain/repositories/department.repository';
+import { DepartmentService } from './services/department.service';
+import { DepartmentController } from '../presentation/controllers/department.controller';
 
 export function configureContainer() {
   validateEnv();
@@ -21,8 +29,9 @@ export function configureContainer() {
 
   // Registrar repositorios
   registerSupabaseRepository(TOKENS.CITY_REPOSITORY, SupabaseCityRepository);
-
   registerSupabaseRepository(TOKENS.NEIGHBORHOOD_REPOSITORY, SupabaseNeighborhoodRepository);
+  registerSupabaseRepository(TOKENS.COUNTRY_REPOSITORY, SupabaseCountryRepository);
+  registerSupabaseRepository(TOKENS.DEPARTMENT_REPOSITORY, SupabaseDepartmentRepository);
 
   // Registrar servicios
   registerService<CityService, CityRepository>(
@@ -30,20 +39,34 @@ export function configureContainer() {
     TOKENS.CITY_REPOSITORY,
     CityService
   );
-
   registerService<NeighborhoodService, NeighborhoodRepository>(
     TOKENS.NEIGHBORHOOD_SERVICE,
     TOKENS.NEIGHBORHOOD_REPOSITORY,
     NeighborhoodService
   );
+  registerService<CountryService, CountryRepository>(
+    TOKENS.COUNTRY_SERVICE,
+    TOKENS.COUNTRY_REPOSITORY,
+    CountryService
+  );
+  registerService<DepartmentService, DepartmentRepository>(
+    TOKENS.DEPARTMENT_SERVICE,
+    TOKENS.DEPARTMENT_REPOSITORY,
+    DepartmentService
+  );
 
   // Registrar controladores
   registerController(TOKENS.CITY_CONTROLLER, TOKENS.CITY_SERVICE, CityController);
-
   registerController(
     TOKENS.NEIGHBORHOOD_CONTROLLER,
     TOKENS.NEIGHBORHOOD_SERVICE,
     NeighborhoodController
+  );
+  registerController(TOKENS.COUNTRY_CONTROLLER, TOKENS.COUNTRY_SERVICE, CountryController);
+  registerController(
+    TOKENS.DEPARTMENT_CONTROLLER,
+    TOKENS.DEPARTMENT_SERVICE,
+    DepartmentController
   );
 }
 /**
