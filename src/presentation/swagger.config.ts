@@ -20,7 +20,7 @@ const options: swaggerJsdoc.Options = {
         description: 'Servidor de desarrollo',
       },
       {
-        url: 'https://geo-info-service.vercel.app/',
+        url: 'https://geo-info-service.vercel.app',
         description: 'Servidor de producción',
       }
     ],
