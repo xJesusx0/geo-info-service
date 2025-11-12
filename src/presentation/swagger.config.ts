@@ -1,6 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import { env } from '../core/env';
 import { url } from 'inspector';
+import path from 'path';
 
 const options: swaggerJsdoc.Options = {
   definition: {
@@ -283,10 +284,14 @@ const options: swaggerJsdoc.Options = {
       },
     },
   },
-  apis: [
-    './src/presentation/routes/*.ts', // Rutas de la API
-    './src/index.ts', // Endpoint raíz
-  ],
+  apis: process.env.NODE_ENV === 'production'
+    ? [
+      path.join(__dirname, '../**/*.js'),
+    ]
+    : [
+      './src/presentation/routes/*.ts',
+      './src/index.ts',
+    ],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
