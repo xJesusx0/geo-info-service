@@ -1,5 +1,6 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import { env } from '../core/env';
+import { url } from 'inspector';
 
 const options: swaggerJsdoc.Options = {
   definition: {
@@ -17,6 +18,10 @@ const options: swaggerJsdoc.Options = {
       {
         url: `http://localhost:${env.PORT}`,
         description: 'Servidor de desarrollo',
+      },
+      {
+        url: 'https://geo-info-service.vercel.app',
+        description: 'Servidor de producción',
       },
     ],
     tags: [
