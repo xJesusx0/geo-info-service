@@ -41,11 +41,10 @@ app.get('/openapi.json', (req, res) => {
 });
 
 app.get('/api-docs', (req, res) => {
-
   const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   const host = req.get('host');
   const baseUrl = `${protocol}://${host}`;
-  
+
   const html = `
 <!DOCTYPE html>
 <html lang="en">

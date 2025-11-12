@@ -284,14 +284,10 @@ const options: swaggerJsdoc.Options = {
       },
     },
   },
-  apis: process.env.NODE_ENV === 'production'
-    ? [
-      path.join(__dirname, '../**/*.js'),
-    ]
-    : [
-      './src/presentation/routes/*.ts',
-      './src/index.ts',
-    ],
+  apis:
+    process.env.NODE_ENV === 'production'
+      ? [path.join(__dirname, '../**/*.js')]
+      : ['./src/presentation/routes/*.ts', './src/index.ts'],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
