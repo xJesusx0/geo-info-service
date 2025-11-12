@@ -40,8 +40,12 @@ app.get('/openapi.json', (req, res) => {
   res.send(swaggerSpec);
 });
 
-// Swagger UI HTML personalizado usando CDN
 app.get('/api-docs', (req, res) => {
+
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.get('host');
+  const baseUrl = `${protocol}://${host}`;
+  
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +76,7 @@ app.get('/api-docs', (req, res) => {
   <script>
     window.onload = function() {
       const ui = SwaggerUIBundle({
-        url: "${req.protocol}://${req.get('host')}/openapi.json",
+        url: "${baseUrl}/openapi.json",
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
