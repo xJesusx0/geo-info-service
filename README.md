@@ -19,6 +19,7 @@ El servicio está construido con Node.js y utiliza Express.js como framework web
 - **Express.js**: Framework web para construir la API REST.
 - **Supabase**: Plataforma de base de datos utilizada como backend.
 - **Dotenv**: Para la gestión de variables de entorno.
+- **Swagger/OpenAPI**: Documentación interactiva de la API.
 
 ## Cómo Empezar
 
@@ -43,7 +44,7 @@ Crea un archivo `.env` en la raíz del proyecto y añade las siguientes variable
 
 ```
 SUPABASE_URL=URL_DE_TU_PROYECTO_SUPABASE
-SUPABASE_KEY=TU_API_KEY_DE_SUPABASE
+SUPABASE_ANON_KEY=TU_API_KEY_DE_SUPABASE
 PORT=3000
 ```
 
@@ -56,3 +57,29 @@ bun run dev
 ```
 
 El servidor se iniciará en el puerto especificado en tu archivo `.env` (por defecto, el puerto 3000).
+
+## Documentación de la API
+
+El proyecto incluye documentación interactiva de la API usando Swagger/OpenAPI. Una vez que el servidor esté ejecutándose, puedes acceder a la documentación en:
+
+```
+http://localhost:3000/api-docs
+```
+
+La documentación incluye:
+- Descripción de todos los endpoints disponibles
+- Parámetros de consulta y path
+- Ejemplos de respuestas
+- Esquemas de datos
+- Capacidad de probar los endpoints directamente desde la interfaz
+
+### Endpoints Disponibles
+
+- **GET /** - Endpoint de salud del servicio
+- **GET /api/v1/cities** - Obtener todas las ciudades (con filtros opcionales)
+- **GET /api/v1/cities/:id** - Obtener una ciudad por ID
+- **GET /api/v1/neighborhoods/point** - Obtener barrio por coordenadas geográficas
+- **GET /api/v1/countries** - Obtener todos los países (con filtros opcionales)
+- **GET /api/v1/countries/:id** - Obtener un país por ID
+- **GET /api/v1/departments** - Obtener todos los departamentos (con filtros opcionales)
+- **GET /api/v1/departments/:id** - Obtener un departamento por ID
