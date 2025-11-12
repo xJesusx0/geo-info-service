@@ -22,9 +22,8 @@ export class DepartmentController {
   getById = async (req: Request, res: Response) => {
     const departmentId = Number(req.params.id);
 
-    const department: Department | null = await this.departmentService.getDepartmentById(
-      departmentId
-    );
+    const department: Department | null =
+      await this.departmentService.getDepartmentById(departmentId);
 
     if (!department) {
       const response: ErrorResponse = { message: 'Department not found' };

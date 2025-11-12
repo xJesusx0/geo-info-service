@@ -63,11 +63,7 @@ export function configureContainer() {
     NeighborhoodController
   );
   registerController(TOKENS.COUNTRY_CONTROLLER, TOKENS.COUNTRY_SERVICE, CountryController);
-  registerController(
-    TOKENS.DEPARTMENT_CONTROLLER,
-    TOKENS.DEPARTMENT_SERVICE,
-    DepartmentController
-  );
+  registerController(TOKENS.DEPARTMENT_CONTROLLER, TOKENS.DEPARTMENT_SERVICE, DepartmentController);
 }
 /**
  * Registra un repositorio que depende de Supabase
