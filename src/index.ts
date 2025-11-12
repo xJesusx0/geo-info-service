@@ -44,6 +44,25 @@ app.get('/', async (req, res) => {
 });
 
 // Swagger documentation
+/**
+ * @swagger
+ * /api-docs.json:
+ *   get:
+ *     summary: Especificación OpenAPI en formato JSON
+ *     description: Retorna la especificación completa de la API en formato OpenAPI 3.0 JSON
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Especificación OpenAPI
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ */
+app.get('/openapi.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/v1/cities', createCityRoutes());

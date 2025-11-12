@@ -66,12 +66,19 @@ El proyecto incluye documentación interactiva de la API usando Swagger/OpenAPI.
 http://localhost:3000/api-docs
 ```
 
+También puedes obtener la especificación OpenAPI en formato JSON:
+
+```
+http://localhost:3000/api-docs.json
+```
+
 La documentación incluye:
 - Descripción de todos los endpoints disponibles
 - Parámetros de consulta y path
 - Ejemplos de respuestas
 - Esquemas de datos
 - Capacidad de probar los endpoints directamente desde la interfaz
+- Especificación OpenAPI en formato JSON para importar en herramientas como Postman o generar clientes automáticamente
 
 ### Endpoints Disponibles
 
