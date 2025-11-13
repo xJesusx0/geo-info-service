@@ -14,10 +14,17 @@ const app = express();
 const port = env.PORT;
 
 app.use(cors({
-  origin: "*",
+  origin: [
+    "https://smart-city-bq-svelte.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000"
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
+
+app.options('*', cors()); // Important: handle preflight
 app.use(express.json());
 
 /**
