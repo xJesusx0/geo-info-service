@@ -13,7 +13,12 @@ import { swaggerSpec } from './presentation/swagger.config';
 const app = express();
 const port = env.PORT;
 
-app.use(cors());
+app.use(cors({
+  origin: ["*"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 app.use(express.json());
 
 /**
