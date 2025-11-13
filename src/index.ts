@@ -13,18 +13,12 @@ import { swaggerSpec } from './presentation/swagger.config';
 const app = express();
 const port = env.PORT;
 
-
-// ⚠️ Configuración personalizada para tu frontend en Vercel
-const corsOptions = {
-  origin: 'https://smart-city-bq-svelte.vercel.app', // el dominio del frontend
+app.use(cors({
+  origin: ["*"],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // solo si usas cookies o tokens en headers
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // importante: manejar preflight OPTIONS
-
+  credentials: true,
+}));
 app.use(express.json());
 
 /**
