@@ -13,20 +13,6 @@ import { swaggerSpec } from './presentation/swagger.config';
 const app = express();
 const port = env.PORT;
 
-
-
-app.use(cors({
-  origin: [
-    "https://smart-city-bq-svelte.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:3000"
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-}));
-
-app.options('*', cors()); // Important: handle preflight
 // CORS middleware for Vercel
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -68,7 +54,6 @@ app.get('/openapi.json', (req, res) => {
 });
 
 app.get('/api-docs', (req, res) => {
-
   const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   const host = req.get('host');
   const baseUrl = `${protocol}://${host}`;
